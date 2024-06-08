@@ -20,6 +20,7 @@ class FoodItemAdapter extends TypeAdapter<FoodItem> {
       foodName: fields[0] as String,
       price: fields[1] as double,
       truckName: fields[2] as String?,
+      photo: fields[3] as String?,
     );
   }
 
@@ -32,7 +33,9 @@ class FoodItemAdapter extends TypeAdapter<FoodItem> {
       ..writeByte(1)
       ..write(obj.price)
       ..writeByte(2)
-      ..write(obj.truckName);
+      ..write(obj.truckName)
+      ..writeByte(2)
+      ..write(obj.photo);
   }
 
   @override

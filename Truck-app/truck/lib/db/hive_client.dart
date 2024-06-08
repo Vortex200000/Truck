@@ -1,5 +1,7 @@
 import 'dart:io';
+
 import 'package:hive/hive.dart';
+// ignore: library_prefixes
 import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'package:truck_app/models/index.dart';
 
@@ -47,17 +49,22 @@ class HiveClient {
     final List<FoodItem> pharaohsFalafelFoodList = [
       FoodItem(
           foodName: 'Classic Falafel Wrap',
-          price: 5.99,
-          photo: 'assets/chicken-shawarma-gyros-9.jpg',
+          price: 6.99,
+          photo: 'assets/flafel/62708678.webp',
           truckName: 'Pharaoh\'s Falafel Wagon'),
       FoodItem(
           foodName: 'Falafel Platter',
           price: 7.99,
-          photo: 'assets/chicken-shawarma-gyros-9.jpg',
+          photo: 'assets/flafel/falafel-platter-hummus.jpg',
           truckName: 'Pharaoh\'s Falafel Wagon'),
       FoodItem(
           foodName: 'Falafel Sandwich',
-          photo: 'assets/chicken-shawarma-gyros-9.jpg',
+          photo: 'assets/flafel/l-intro-1621010928.jpg',
+          price: 4.99,
+          truckName: 'Pharaoh\'s Falafel Wagon'),
+      FoodItem(
+          foodName: 'Fool Sandwich',
+          photo: 'assets/flafel/FOOL SANDWITCH.jpg',
           price: 4.99,
           truckName: 'Pharaoh\'s Falafel Wagon'),
     ];
@@ -67,15 +74,18 @@ class HiveClient {
       FoodItem(
           foodName: 'Chicken Shawarma Wrap',
           price: 6.99,
-          truckName: 'Nile Street Shawarma Shuttle'),
+          truckName: 'Nile Street Shawarma Shuttle',
+          photo: 'assets/shawrma/chicken-shawarma-IG.jpg'),
       FoodItem(
           foodName: 'Beef Shawarma Platter',
           price: 8.99,
-          truckName: 'Nile Street Shawarma Shuttle'),
+          truckName: 'Nile Street Shawarma Shuttle',
+          photo: 'assets/shawrma/beef-shawarma-recipe-IG.jpg'),
       FoodItem(
           foodName: 'Lamb Shawarma Sandwich',
           price: 7.99,
-          truckName: 'Nile Street Shawarma Shuttle'),
+          truckName: 'Nile Street Shawarma Shuttle',
+          photo: 'assets/shawrma/easy-lamb-shawarma-salad-182074-2.jpg'),
     ];
 
 // Create food items for Cairo Koshary Cart
@@ -83,28 +93,46 @@ class HiveClient {
       FoodItem(
           foodName: 'Traditional Koshary Bowl',
           price: 6.49,
-          truckName: 'Cairo Koshary Cart'),
+          truckName: 'Cairo Koshary Cart',
+          photo: 'assets/koshary/Egyptian-Koshari-square.jpg'),
       FoodItem(
           foodName: 'Spicy Koshary Platter',
           price: 7.99,
-          truckName: 'Cairo Koshary Cart'),
+          truckName: 'Cairo Koshary Cart',
+          photo: 'assets/koshary/spicyKoshari-1.jpg'),
       FoodItem(
           foodName: 'Koshary Salad',
           price: 5.99,
-          truckName: 'Cairo Koshary Cart'),
+          truckName: 'Cairo Koshary Cart',
+          photo: 'assets/koshary/Koshary-Salad9801-1.jpg'),
+      FoodItem(
+          foodName: 'roz plapn',
+          photo: 'assets/koshary/roz.jpg',
+          price: 4.99,
+          truckName: 'Cairo Koshary Cart')
     ];
 
     final List<FoodItem> burgerFoodList = [
       FoodItem(
-          foodName: 'Meat Burger ', price: 6.49, truckName: 'Cairo Truck Cart'),
+          foodName: 'Meat Burger ',
+          price: 6.49,
+          truckName: 'Cairo Truck Cart',
+          photo: 'assets/burger/beef.jpg'),
       FoodItem(
           foodName: 'Chicken Burger ',
           price: 7.99,
-          truckName: 'Burger Truck Cart'),
+          truckName: 'Burger Truck Cart',
+          photo: 'assets/burger/Crispy-Chicken-Burger-square-FS-4518.jpg'),
       FoodItem(
           foodName: 'Mixed Burger',
           price: 5.99,
-          truckName: 'Burger Truck Cart'),
+          truckName: 'Burger Truck Cart',
+          photo: 'assets/burger/mixed.jpg'),
+      FoodItem(
+          foodName: 'Pepsi can',
+          price: 4.99,
+          truckName: 'Burger Truck Cart',
+          photo: 'assets/burger/s505972377717305139_p203_i1_w2000.webp')
     ];
 
     // Create and add Pharaoh's Falafel Wagon truck
@@ -150,13 +178,11 @@ class HiveClient {
     }
 
     // Adds the food to the db, if the db is not empty
-    if (!foodBox.isEmpty) {
-      foodBox.clear();
-      //
-      // foodBox.addAll(pharaohsFalafelFoodList);
-      // foodBox.addAll(nileStreetShawarmaFoodList);
-      // foodBox.addAll(cairoKosharyFoodList);
-      // foodBox.addAll(burgerFoodList);
+    if (foodBox.isEmpty) {
+      foodBox.addAll(pharaohsFalafelFoodList);
+      foodBox.addAll(nileStreetShawarmaFoodList);
+      foodBox.addAll(cairoKosharyFoodList);
+      foodBox.addAll(burgerFoodList);
     }
   }
 }

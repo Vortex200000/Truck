@@ -6,7 +6,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.0-90.0.dev <4.0.0'
+  sdk: '>=3.1.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -18,6 +18,7 @@ dependencies:
   hive_flutter: ^1.1.0
   google_fonts: 6.1.0
   flutter_svg: ^2.0.10+1
+  url_launcher: 6.2.4
 
 dev_dependencies:
   flutter_test:
@@ -30,9 +31,16 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-      - assets/chicken-shawarma-gyros-9.jpg
-      - assets/egyptian_koshary_800x800.jpg
-      - assets/Falafel-TIMG.jpg
-      - assets/SvgIcons/cart-5-svgrepo-com.svg
-      - assets/423203a50a85745ee5ff98ff201043f7_w750_h500.webp
-      - assets/download.jpeg
+    - assets/chicken-shawarma-gyros-9.jpg
+    - assets/egyptian_koshary_800x800.jpg
+    - assets/Falafel-TIMG.jpg
+    - assets/SvgIcons/cart-5-svgrepo-com.svg
+    - assets/SvgIcons/empty-cart-svgrepo-com.svg
+    - assets/SvgIcons/location-pin-svgrepo-com.svg
+
+    - assets/423203a50a85745ee5ff98ff201043f7_w750_h500.webp
+    - assets/download.jpeg
+    - assets/flafel/
+    - assets/shawrma/
+    - assets/koshary/
+    - assets/burger/

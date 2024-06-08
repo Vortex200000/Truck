@@ -6,6 +6,9 @@
       <excludeFolder url="file://$MODULE_DIR$/Truck-app/truck/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/Truck-app/truck/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/Truck-app/truck/build" />
+      <excludeFolder url="file://$MODULE_DIR$/truck/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/truck/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/truck/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

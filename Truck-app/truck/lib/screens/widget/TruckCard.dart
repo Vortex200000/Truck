@@ -1,12 +1,12 @@
-import 'dart:ffi';
+// ignore: file_names
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:truck_app/models/index.dart';
 import 'package:truck_app/screens/truck_menu_screen.dart';
-import 'package:truck_app/screens/widget/truck_item.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+// ignore: must_be_immutable
 class TruckkCard extends StatelessWidget {
   Truck trucks;
 
@@ -18,10 +18,11 @@ class TruckkCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => TruckMenuScreen(truck: trucks),
-            ));
+          context,
+          MaterialPageRoute(
+            builder: (context) => TruckMenuScreen(truck: trucks),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -42,26 +43,46 @@ class TruckkCard extends StatelessWidget {
                         border: Border.all(color: Colors.transparent),
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                            image: AssetImage(trucks.thumbnailImageUrl??''),
+                            image: AssetImage(trucks.thumbnailImageUrl ?? ''),
                             fit: BoxFit.cover)),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        trucks.truckName,
-                        style: GoogleFonts.aBeeZee(fontWeight: FontWeight.bold),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            trucks.truckName,
+                            style: GoogleFonts.aBeeZee(
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Try it now ',
+                            style: GoogleFonts.aBeeZee(
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ],
                       ),
-                      Text(
-                        'Try it now ',
-                        style: GoogleFonts.aBeeZee(fontWeight: FontWeight.w500),
-                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: InkWell(
+                          child: IconButton(
+                            iconSize: 20,
+                            icon: const Icon(Icons.location_on_outlined),
+                            onPressed: () async {
+                              await goToWebPage(
+                                  "https://www.google.com/maps/@29.9100485,30.9470419,17z?entry=ttu");
+                            },
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -71,5 +92,12 @@ class TruckkCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> goToWebPage(String urlString) async {
+    final Uri url = Uri.parse(urlString);
+    if (!await launchUrl(url)) {
+      throw 'could not launch $url';
+    }
   }
 }

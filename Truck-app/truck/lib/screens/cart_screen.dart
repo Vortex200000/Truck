@@ -1,22 +1,33 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:truck_app/db/hive_client.dart';
 import 'package:truck_app/models/index.dart';
 import 'package:truck_app/screens/truck_screen.dart';
 import 'package:truck_app/screens/widget/food_menu_item.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({
+  CartScreen({
+    required this.truck,
     super.key,
   });
 
+  Truck truck;
+
   @override
-  State<CartScreen> createState() => _CartScreenState();
+  // ignore: no_logic_in_create_state
+  State<CartScreen> createState() => _CartScreenState(truck);
 }
 
 class _CartScreenState extends State<CartScreen> {
   late List<OrderItem> _orderItems;
+  Truck truck;
+
+  _CartScreenState(this.truck);
 
   MediaQueryData get mediaQuery => MediaQuery.of(context);
 
@@ -80,7 +91,35 @@ class _CartScreenState extends State<CartScreen> {
 
   void _showOrderSuccessfulDialog() {
     AlertDialog alert = AlertDialog(
+      backgroundColor: Colors.white,
       title: const Text('Order Successful'),
+      content: Column(children: [
+        Text('Price : $total'),
+        const SizedBox(
+          height: 10,
+        ),
+        Text('Truck : ${widget.truck.truckName}'),
+        const SizedBox(
+          height: 20,
+        ),
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Name'),
+            Text('Price'),
+          ],
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(_orderItems.first.foodName),
+            Text(_orderItems.first.price.toString()),
+          ],
+        )
+      ]),
       actions: [
         ElevatedButton(
           onPressed: _dismissAndNavigateToTrucks,
@@ -107,25 +146,42 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Trucks"),
-        backgroundColor: Colors.purple.shade100.withOpacity(0.45),
+        backgroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(
+              height: 50,
+            ),
             isCartEmpty
-                ? Text(
-                    'Empty Cart',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.indigoAccent,
+                ? Center(
+                    child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                            'assets/SvgIcons/empty-cart-svgrepo-com.svg'),
+                        const SizedBox(
+                          height: 20,
                         ),
-                  )
+                        Text(
+                          'Sorry Your Cart Is Empty',
+                          style:
+                              GoogleFonts.aBeeZee(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ))
                 : const SizedBox.shrink(),
             isCartEmpty
-                ? Text(
-                    'Please add Items',
-                    style: Theme.of(context).textTheme.labelLarge,
+                ? Center(
+                    child: Text('Please add Items',
+                        style:
+                            GoogleFonts.aBeeZee(fontWeight: FontWeight.bold)),
                   )
                 : const SizedBox.shrink(),
             Expanded(
@@ -134,6 +190,7 @@ class _CartScreenState extends State<CartScreen> {
                 itemBuilder: (context, index) => SizedBox(
                   height: 100,
                   child: FoodMenuItem.summary(
+                    photo: widget.truck.thumbnailImageUrl ?? '',
                     orderItem: _orderItems[index],
                     index: index,
                     onResetCart: _showEmptyCartPopup,
@@ -146,18 +203,17 @@ class _CartScreenState extends State<CartScreen> {
             Visibility(
               visible: !isCartEmpty,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Column(
                       children: [
-                        const Text('Total:'),
                         Text(
-                          'EGP ${total.toStringAsFixed(2)}',
-                          style:
-                              Theme.of(context).textTheme.labelLarge?.copyWith(
-                                    color: Colors.indigoAccent,
-                                  ),
+                          'Total:',
+                          style: GoogleFonts.aBeeZee(color: Colors.black),
                         ),
+                        Text('EGP ${total.toStringAsFixed(2)}',
+                            style: GoogleFonts.aBeeZee(color: Colors.black)),
                       ],
                     ),
                   ),
@@ -173,8 +229,15 @@ class _CartScreenState extends State<CartScreen> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xff6652cc),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
                       onPressed: _submitOrder,
-                      child: const Text('Submit Order'),
+                      child: Text(
+                        'Submit Order',
+                        style: GoogleFonts.aBeeZee(color: Colors.white),
+                      ),
                     ),
                   ),
                 ],

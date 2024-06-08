@@ -1,4 +1,4 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
+0// GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'order_item.dart';
 

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:truck_app/db/hive_client.dart';
@@ -50,7 +52,7 @@ class _TruckScreenState extends State<TruckScreen> {
                 style: GoogleFonts.aBeeZee(),
               ),
               IconButton(
-                icon: Icon(Icons.logout),
+                icon: const Icon(Icons.logout),
                 onPressed: _logoutUser,
               ),
             ],
@@ -66,11 +68,11 @@ class _TruckScreenState extends State<TruckScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Availaple Food ',
-                    style: GoogleFonts.aBeeZee(
-                        fontWeight: FontWeight.bold, fontSize: 25),
-                  ),
+                  // Text(
+                  //   'Availaple Food ',
+                  //   style: GoogleFonts.aBeeZee(
+                  //       fontWeight: FontWeight.bold, fontSize: 25),
+                  // ),
                   Text(
                     'Trucks',
                     style: GoogleFonts.aBeeZee(

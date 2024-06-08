@@ -1,9 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:truck_app/db/hive_client.dart';
 import 'package:truck_app/screens/sign_up_screen.dart';
-import 'dart:developer';
-
 import 'package:truck_app/screens/truck_screen.dart';
 
 import '../models/index.dart';
@@ -147,22 +147,17 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 90),
-
+                const SizedBox(
+                  height: 250,
+                ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('Welcome',
+                    Text('Sign Up',
                         style: GoogleFonts.aBeeZee(
-                            fontSize: 22, fontWeight: FontWeight.bold)),
-                    Text('Please Login To Continue',
-                        style: GoogleFonts.aBeeZee(
-                            fontSize: 22, fontWeight: FontWeight.bold)),
-                    Text('Login',
-                        style: GoogleFonts.aBeeZee(
-                            fontSize: 22, fontWeight: FontWeight.bold)),
+                            fontSize: 50, fontWeight: FontWeight.bold)),
                   ],
                 ),
                 // Image.asset(
@@ -207,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         validator: (password) => _validatePassword(password),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       SizedBox(
@@ -218,27 +213,24 @@ class _LoginScreenState extends State<LoginScreen> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               elevation: 0,
-                              backgroundColor: Color(0xff6652cc)),
+                              backgroundColor: const Color(0xff6652cc)),
                           onPressed: _submitForm,
                           child: Text(
-                            'Login',
+                            'Sign up',
                             style: GoogleFonts.aBeeZee(color: Colors.white),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        'Dont Have Account yet ? SignUp Now.',
-                        style: GoogleFonts.aBeeZee(),
-                      ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       TextButton(
                         onPressed: _navigateToSignupPage,
-                        child: Text('Sign Up', style: GoogleFonts.aBeeZee()),
+                        child: Text('I have Account ' 'Login',
+                            style: GoogleFonts.aBeeZee()),
                       ),
                     ],
                   ),

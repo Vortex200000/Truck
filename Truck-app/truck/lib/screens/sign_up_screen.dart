@@ -1,9 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:truck_app/db/hive_client.dart';
 import 'package:truck_app/models/index.dart';
-import 'dart:developer';
-
 import 'package:truck_app/screens/login_screen.dart';
 import 'package:truck_app/screens/truck_screen.dart';
 
@@ -126,21 +126,20 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 90),
+                const SizedBox(
+                  height: 250,
+                ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Sign Up ',
+                      'Log In ',
                       style: GoogleFonts.aBeeZee(
-                          fontSize: 22, fontWeight: FontWeight.bold),
+                          fontSize: 50, fontWeight: FontWeight.bold),
                     ),
-                    Text('Now For Free ',
-                        style: GoogleFonts.aBeeZee(
-                            fontSize: 22, fontWeight: FontWeight.bold))
 
                     //
                   ],
@@ -183,7 +182,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         validator: (password) => _validatePassword(password),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       SizedBox(
@@ -193,7 +192,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
-                              backgroundColor: Color(0xff6652cc)),
+                              backgroundColor: const Color(0xff6652cc)),
                           onPressed: _submitForm,
                           child: Text(
                             'Sign Up',
@@ -201,11 +200,11 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text('Already Have An Account ? Login Now.'),
-                      SizedBox(
+                      const Text('Already Have An Account ? Login Now.'),
+                      const SizedBox(
                         height: 10,
                       ),
                       TextButton(

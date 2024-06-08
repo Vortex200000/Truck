@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:truck_app/db/hive_client.dart';
 import 'package:truck_app/models/index.dart';
 
@@ -9,6 +10,7 @@ typedef OnResetCart = Function(OrderItem item, int index);
 class FoodMenuItem extends StatefulWidget {
   const FoodMenuItem({
     super.key,
+    required this.photo,
     required this.foodItem,
     required this.index,
     this.isSummary = false,
@@ -18,9 +20,11 @@ class FoodMenuItem extends StatefulWidget {
   factory FoodMenuItem.summary({
     required OrderItem orderItem,
     required int index,
+    required String photo,
     OnResetCart? onResetCart,
   }) {
     return FoodMenuItem(
+      photo: photo,
       foodItem: orderItem,
       index: index,
       isSummary: true,
@@ -28,6 +32,7 @@ class FoodMenuItem extends StatefulWidget {
     );
   }
 
+  final String photo;
   final bool isSummary;
   final int index;
   final FoodItem foodItem;
@@ -113,58 +118,68 @@ class _FoodMenuItemState extends State<FoodMenuItem> {
       width: 10,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            // Todo: add food.png
-            Image.asset(
-              'assets/download.jpeg',
-              width: 75,
-              height: 75,
-            ),
-            SizedBox.fromSize(
-              size: const Size.fromWidth(24),
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _food.foodName,
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: Colors.indigoAccent,
-                        ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    'EGP ${_food.price.toStringAsFixed(2)}',
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: Colors.indigoAccent,
-                        ),
-                  ),
-                ],
-              ),
-            ),
-            Row(
+        child: Card(
+          elevation: 1,
+          child: Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.transparent),
+                borderRadius: BorderRadius.circular(20)),
+            child: Row(
               children: [
-                Visibility(
-                  visible: !widget.isSummary,
-                  child: IconButton(
-                    icon: const Icon(Icons.remove_circle_outline),
-                    onPressed: _count >= 1 ? _decrementItemCount : null,
+                // Todo: add food.png
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(_food.photo.toString()),
+                            fit: BoxFit.cover),
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
-                Text('$_count'),
-                Visibility(
-                  visible: !widget.isSummary,
-                  child: IconButton(
-                    icon: const Icon(Icons.add_circle_outline),
-                    onPressed: _incrementItemCount,
+                SizedBox.fromSize(
+                  size: const Size.fromWidth(24),
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _food.foodName,
+                        style: GoogleFonts.aBeeZee(color: Colors.black),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text('EGP ${_food.price.toStringAsFixed(2)}',
+                          style: GoogleFonts.aBeeZee(color: Colors.black)),
+                    ],
                   ),
                 ),
+                Row(
+                  children: [
+                    Visibility(
+                      visible: !widget.isSummary,
+                      child: IconButton(
+                        icon: const Icon(Icons.remove_circle_outline),
+                        onPressed: _count >= 1 ? _decrementItemCount : null,
+                      ),
+                    ),
+                    Text('$_count'),
+                    Visibility(
+                      visible: !widget.isSummary,
+                      child: IconButton(
+                        icon: const Icon(Icons.add_circle_outline),
+                        onPressed: _incrementItemCount,
+                      ),
+                    ),
+                  ],
+                )
               ],
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );
